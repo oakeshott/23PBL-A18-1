@@ -95,7 +95,7 @@ int record_packet(struct xdp_md *ctx) {
     pkt_key.sport = ntohs(th->source);
     pkt_key.dport = ntohs(th->dest);
 
-    goto drop;
+    goto record;
   }
   udp: {
     uh = (struct udphdr *)(iph + 1);
@@ -105,9 +105,9 @@ int record_packet(struct xdp_md *ctx) {
     pkt_key.sport = ntohs(uh->source);
     pkt_key.dport = ntohs(uh->dest);
 
-    goto drop;
+    goto record;
   }
-  drop: {
+  record: {
     struct pkt_leaf_t *pkt_leaf = sessions.lookup(&pkt_key);
     if (!pkt_leaf) {
       struct pkt_leaf_t zero = {};
