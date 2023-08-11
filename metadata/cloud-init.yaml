@@ -1,9 +1,9 @@
 #cloud-config
 timezone: Asia/Tokyo
 locale: en_US.UTF-8
-
 runcmd:
-  - cat <<EOF | sudo tee /etc/bcc-installer.sh
+  - |
+    cat <<EOF | sudo tee /etc/bcc-installer.sh
     #/bin/bash
     export LLVM_ROOT=/usr/lib/llvm-12/
     cd /usr/src
@@ -20,7 +20,8 @@ runcmd:
     sudo make install
     popd
     EOF
-  - cat <<EOF | sudo tee /etc/bootstrap.sh
+  - |
+    cat <<EOF | sudo tee /etc/bootstrap.sh
     #!/usr/bin/env bash
     echo *************************
     echo ****  Finish Setup   ****
