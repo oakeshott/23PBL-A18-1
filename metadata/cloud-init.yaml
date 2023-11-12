@@ -40,20 +40,16 @@ runcmd:
     echo *      Apt install      *
     echo *************************
     TZ=Asia/Tokyo
-    ln -snf /usr/share/zoneinfo/ /etc/localtime && echo  > /etc/timezone
+    ln -snf /usr/share/zoneinfo/ /etc/localtime && echo \${TZ} > /etc/timezone
     DEBIAN_FRONTEND=noninteractive
     sudo apt update -y
     # sudo apt install linux-image-5.15.0-78-generic linux-headers-5.15.0-78-generic linux-modules-extra-5.15.0-78-generic
     sudo apt install -y wget openssh-server golang iperf3 jq netperf arping sysstat tmux hping3
-    sudo apt install -y bison build-essential flex git libedit-dev libllvm12 llvm-12-dev libclang-12-dev zlib1g-dev libelf-dev libfl-dev python3-distutils linux-headers-$(uname -r)
+    sudo apt install -y bison build-essential flex git libedit-dev libllvm12 llvm-12-dev libclang-12-dev zlib1g-dev libelf-dev libfl-dev python3-distutils linux-headers-\$(uname -r)
     sudo apt install -y apt-transport-https ca-certificates curl software-properties-common gnupg2
     sudo apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl cmake libncursesw5-dev tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libopencv-dev git
-    sudo apt install build-essential libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev curl \
-    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-    sudo add-apt-repository ppa:deadsnakes/ppa
-    sudo apt install -y python3.9
-    sudo swapoff -a
+    sudo apt install build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+    # sudo swapoff -a
     cd
     git clone https://github.com/oakeshott/23PBL-A18-1.git
     sudo reboot
@@ -61,4 +57,4 @@ runcmd:
   - chmod +x /etc/bootstrap.sh
   - chmod +x /etc/pyenv-installer.sh
   - chmod +x /etc/bcc-installer.sh
-  - [/bin/bash, /etc/bootstrap.sh]
+  # - [/bin/bash, /etc/bootstrap.sh]
