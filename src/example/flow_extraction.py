@@ -35,6 +35,7 @@ struct pkt_key_t {
 struct pkt_leaf_t {
   u32 num_packets;
   u64 last_packet_timestamp;
+  u32 tot_len;
   u32 saddr;
   u32 daddr;
   u32 sport;
@@ -130,6 +131,7 @@ int record_packet(struct xdp_md *ctx) {
       if (pkt_leaf->last_packet_timestamp > 0) {
         interval_time = ts - pkt_leaf->last_packet_timestamp;
       }
+      pkt_leaf->tot_len += tot_len;
       pkt_leaf->last_packet_timestamp = ts;
       int64_t direction = pkt_key.sport == sport;
 
